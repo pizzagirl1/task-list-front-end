@@ -17,11 +17,6 @@
   border-color: rgba(0, 0, 0, 0.15);
 }
 
-.tasks__item__toggle--completed {
-  text-decoration: line-through;
-  background-color: rgba(0, 128, 0, 0.15);
-  border-color: rgba(0, 128, 0, 0.2);
-}
 
 .tasks__item__toggle {
   cursor: pointer;
@@ -30,6 +25,12 @@
   padding: 0.85em 2.25em 0.85em 1em;
   background-color: rgba(0, 0, 0, 0.05);
   border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tasks__item__toggle--completed {
+  text-decoration: line-through;
+  background-color: rgba(0, 128, 0, 0.15);
+  border-color: rgba(0, 128, 0, 0.2);
 }
 
 button.tasks__item__remove {
