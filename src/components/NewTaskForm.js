@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-const NewTaskInput = () => {
+const NewTaskInput = ( {addTask} ) => {
     const defaultTaskForm = {
         title: '',
         description: ''
@@ -23,21 +24,46 @@ const NewTaskInput = () => {
         });
     };
 
+    const onFormSubmit = (event) => {
+        event.preventDefault();
+
+        addTask({
+            title: formFields.title,
+            description: formFields.description
+        });
+
+        setFormFields(defaultTaskForm);
+    };
+
     return (
     <form>
         <div>
             <label htmlFor="title">Title:</label>
-            <input name="title" onChange={onTitleChange}/>
+            <input 
+                name="title" 
+                onChange={onTitleChange}
+                value={formFields.title}
+            />
         </div>
         <div>
             <label htmlFor="description">Description:</label>
-            <input name="description" onChange={onDescriptionChange}/>
+            <input 
+                name="description" 
+                onChange={onDescriptionChange}
+                value={formFields.description}
+            />
         </div>
         <input
             type="submit"
-            value="Add Task" />
+            value="Add Task" 
+            onSubmit={onFormSubmit}
+        />
     </form>
     );
 };
 
-export default NewTaskInput;
+NewTaskInput.propTypes = {
+    addTask: PropTypes.func.isRequired,
+};
+
+export default NewTaskInput; 

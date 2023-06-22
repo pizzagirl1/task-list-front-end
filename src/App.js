@@ -81,6 +81,22 @@ const App = () => {
     .catch((e) => console.log('error!', e));
   };
 
+  const addTask = (newTask) => {
+    const newTaskList = [...taskData];
+    const nextId = Math.max(...newTaskList.map(task => task.id)) + 1;
+
+    newTaskList.push({
+      id: nextId,
+      title: newTask.title,
+      description: newTask.description,
+      isComplete: false
+    });
+    // addTaskToAPI(newTask);
+    setTaskData(newTaskList);
+  };
+
+  // const addTaskToAPI = (newTask) => {};
+
   return (
     <div className="App">
       <header className="App-header">
@@ -88,13 +104,15 @@ const App = () => {
       </header>
       <main>
         <div>
-          <NewTaskForm/>
+          <NewTaskForm
+            addTask={addTask}
+          />
         </div>
         <div>
           <TaskList 
-          tasks={taskData} 
-          updateTaskData={updateTaskData}
-          deleteTask={deleteTask}
+            tasks={taskData} 
+            updateTaskData={updateTaskData}
+            deleteTask={deleteTask}
           />
         </div>
       </main>
