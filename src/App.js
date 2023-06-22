@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TaskList from './components/TaskList.js';
 import './App.css';
+import axios from 'axios';
 
 const TASKS = [
   {
@@ -16,8 +17,31 @@ const TASKS = [
 ];
 
 const App = () => {
+  // change to initialize as blank
   const [taskData, setTaskData] = useState(TASKS);
   
+  useEffect( () => {
+    return axios.get('https://task-list-api-c17.onrender.com/tasks')
+      .then((response) => {
+        let newTaskData = convertDataFromApi(response.data);
+        setTaskData(newTaskData);
+      })
+      .catch((e) => console.log(e));
+  }, []);
+
+  const convertDataFromApi = (data) => {
+    const tasks = [];
+    for (let task of data) {
+      let newTask = {
+        id: task.id,
+        title: task.title,
+        isComplete: task.is_complete
+      };
+      tasks.push(newTask);
+    }
+    return tasks;
+  };
+
   const updateTaskData = (updatedTask) => {
     const tasks = taskData.map(task => {
       if (task.id === updatedTask.id) {
