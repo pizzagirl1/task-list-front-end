@@ -16,32 +16,39 @@ const TASKS = [
   },
 ];
 
-const App = () => {
-  // change to initialize as blank
-  const [taskData, setTaskData] = useState(TASKS);
-  
-  useEffect( () => {
-    return axios.get('https://task-list-api-c17.onrender.com/tasks')
-      .then((response) => {
-        let newTaskData = convertDataFromApi(response.data);
-        setTaskData(newTaskData);
-      })
-      .catch((e) => console.log(e));
-  }, []);
+const taskURL = 'https://task-list-api-c17.onrender.com/';
 
-  const convertDataFromApi = (data) => {
-    const tasks = [];
-    for (let task of data) {
-      let newTask = {
-        id: task.id,
-        title: task.title,
-        isComplete: task.is_complete
-      };
-      tasks.push(newTask);
-    }
-    return tasks;
+const getAllTasks = () => {
+  return axios.get(`${taskURL}/tasks`)
+    .then((response) => {
+      return convertDataFromApi(response.data);})
+    .catch((e) => console.log(e));
+};
+
+const convertDataFromApi = (data) => {
+  const tasks = [];
+  for (let task of data) {
+    let newTask = {
+      id: task.id,
+      title: task.title,
+      isComplete: task.is_complete
+    };
+    tasks.push(newTask);
+  }
+  return tasks;
+};
+
+const App = () => {
+  const [taskData, setTaskData] = useState([]);
+  
+  const fetchTasks = () => {
+    getAllTasks().then((tasks) => setTaskData(tasks));
   };
 
+  useEffect( () => {
+    fetchTasks();
+  }, []);
+  
   const updateTaskData = (updatedTask) => {
     const tasks = taskData.map(task => {
       if (task.id === updatedTask.id) {
