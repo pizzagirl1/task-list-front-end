@@ -16,7 +16,7 @@ import axios from 'axios';
 //   },
 // ];
 
-const taskURL = 'https://task-list-api-c17.onrender.com/';
+const taskURL = 'https://task-list-api-c17.onrender.com';
 
 const getAllTasks = () => {
   return axios.get(`${taskURL}/tasks`)
