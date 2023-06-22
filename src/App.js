@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TaskList from './components/TaskList.js';
+import NewTaskForm from './components/NewTaskForm.js';
 import './App.css';
 import axios from 'axios';
 
@@ -16,10 +17,10 @@ import axios from 'axios';
 //   },
 // ];
 
-const taskURL = 'https://task-list-api-c17.onrender.com';
+const taskURL = 'https://task-list-api-c17.onrender.com/tasks';
 
 const getAllTasks = () => {
-  return axios.get(`${taskURL}/tasks`)
+  return axios.get(`${taskURL}`)
     .then((response) => {
       return convertDataFromApi(response.data);})
     .catch((e) => console.log(e));
@@ -86,6 +87,9 @@ const App = () => {
         <h1>Ada&apos;s Task List</h1>
       </header>
       <main>
+        <div>
+          <NewTaskForm/>
+        </div>
         <div>
           <TaskList 
           tasks={taskData} 
