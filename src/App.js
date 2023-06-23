@@ -4,19 +4,6 @@ import NewTaskForm from './components/NewTaskForm.js';
 import './App.css';
 import axios from 'axios';
 
-// const TASKS = [
-//   {
-//     id: 1,
-//     title: 'Mow the lawn',
-//     isComplete: false,
-//   },
-//   {
-//     id: 2,
-//     title: 'Cook Pasta',
-//     isComplete: true,
-//   },
-// ];
-
 const taskURL = 'https://task-list-api-c17.onrender.com/tasks';
 
 const getAllTasks = () => {
@@ -78,7 +65,7 @@ const App = () => {
   const deleteTaskFromAPI = (id) => {
     axios.delete(`${taskURL}/${id}`)
     .then((response) => console.log('deleted!', response.data))
-    .catch((e) => console.log('error!', e));
+    .catch((e) => console.log('error in delete!', e));
   };
 
   const addTask = (newTask) => {
@@ -103,7 +90,7 @@ const App = () => {
     };
     axios.post(`${taskURL}`, params)
     .then((response) => console.log('posted!', response))
-    .catch((e) => console.log(e));
+    .catch((e) => console.log('error in posting!',e));
   };
 
   return (
