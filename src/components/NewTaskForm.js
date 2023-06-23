@@ -36,7 +36,7 @@ const NewTaskInput = ( {addTask} ) => {
     };
 
     return (
-    <form>
+    <form onSubmit={onFormSubmit}>
         <div>
             <label htmlFor="title">Title:</label>
             <input 
@@ -56,7 +56,6 @@ const NewTaskInput = ( {addTask} ) => {
         <input
             type="submit"
             value="Add Task" 
-            onSubmit={onFormSubmit}
         />
     </form>
     );

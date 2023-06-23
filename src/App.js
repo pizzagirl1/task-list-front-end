@@ -91,11 +91,20 @@ const App = () => {
       description: newTask.description,
       isComplete: false
     });
-    // addTaskToAPI(newTask);
+
+    addTaskToAPI(newTask);
     setTaskData(newTaskList);
   };
 
-  // const addTaskToAPI = (newTask) => {};
+  const addTaskToAPI = (newTask) => {
+    let params = {
+      title: newTask.title,
+      description: newTask.description,
+    };
+    axios.post(`${taskURL}`, params)
+    .then((response) => console.log('posted!', response))
+    .catch((e) => console.log(e));
+  };
 
   return (
     <div className="App">
